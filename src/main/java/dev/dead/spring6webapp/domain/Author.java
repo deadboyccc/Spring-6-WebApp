@@ -1,14 +1,15 @@
 package dev.dead.spring6webapp.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
-import java.awt.print.Book;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Data
+@Builder
 
 public class Author {
     @Id
@@ -19,4 +20,5 @@ public class Author {
     // mapped by authors attribute in the book entity
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "authors")
     private Set<Book> books=new HashSet<>();
+
 }
