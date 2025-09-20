@@ -43,6 +43,7 @@ public class DataBootstrap implements CommandLineRunner {
 
         // create publisher
         Publisher publisher = Publisher.builder()
+                .publisherName("publisherName")
                 .city("Baghdad")
                 .zipCode("10001")
                 .build();
