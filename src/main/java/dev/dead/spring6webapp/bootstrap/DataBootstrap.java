@@ -2,9 +2,11 @@ package dev.dead.spring6webapp.bootstrap;
 
 import dev.dead.spring6webapp.domain.Author;
 import dev.dead.spring6webapp.domain.Book;
+import dev.dead.spring6webapp.domain.KotlinDomain;
 import dev.dead.spring6webapp.domain.Publisher;
 import dev.dead.spring6webapp.repository.AuthorRepository;
 import dev.dead.spring6webapp.repository.BookRepository;
+import dev.dead.spring6webapp.repository.KotlinRepository;
 import dev.dead.spring6webapp.repository.PublisherRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ public class DataBootstrap implements CommandLineRunner {
     private final BookRepository bookRepository;
     private final PublisherRepository publisherRepository;
     private final AuthorRepository authorRepository;
+    private final KotlinRepository kotlinRepository;
 
     @Override
     public void run(String... args) {
@@ -29,6 +32,13 @@ public class DataBootstrap implements CommandLineRunner {
         bookRepository.deleteAll();
         authorRepository.deleteAll();
         publisherRepository.deleteAll();
+        //--kolin stuff
+        kotlinRepository.deleteAll();
+        var kotlin = new KotlinDomain();
+        kotlin.setName("Joe");
+        kotlinRepository.save(kotlin);
+        kotlinRepository.flush();
+
 
         // create authors
         Author author1 = Author.builder()
@@ -79,6 +89,7 @@ public class DataBootstrap implements CommandLineRunner {
         // logs
         log.debug("---------- Bootstrap Data Loaded ----------");
         log.debug("Book count: {}", bookRepository.count());
+        log.debug("Kotlin count: {}", kotlinRepository.count());
         log.debug("Author count: {}", authorRepository.count());
         log.debug("Publisher count: {}", publisherRepository.count());
         log.debug("-------------------------------------------");
