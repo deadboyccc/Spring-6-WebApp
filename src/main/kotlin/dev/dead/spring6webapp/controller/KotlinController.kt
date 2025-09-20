@@ -10,4 +10,7 @@ class KotlinController(private val KotlinService: KotlinService) {
     fun kotlin(): String? {
         return KotlinService.get()?.name;
     }
+
+    @GetMapping("hellokotlin")
+    fun helloKotlin(): String? = "Hello Kotlin"
 }
